@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    {% for img in imgs %}
+    <div class="work">
+        <a href="/inner/?name={{ img['name'] }}">             <!--此处跳转至该图片的详情  -->
+            <img src='{{ static_url("img/" + img["name"]) }}' class="media" alt="">
+            <div class="caption">
+                <div class="work_title">
+                    <h1>{{ img["title"] }}</h1>  
+                </div>
+            </div>
+        </a>
+    </div>
+    {% end %}
+{% end %}
+
+{% block scriptContent %}
+
+    
+<script type="text/javascript">
+    $(function () {
+        $(".home").addClass("selected");
+    })
+</script>
+{% end %}

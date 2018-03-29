@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>图片合成器</title>
+
+    <link rel="stylesheet" type="text/css" href='{{static_url("css/reset.css")}}'>
+    <link rel="stylesheet" type="text/css" href='{{static_url("css/main.css")}}'>
+    <link href='{{static_url("css/bootstrap.min.css")}}' rel="stylesheet">
+    <script src='{{static_url("js/ca_pub.js")}}'></script>
+    <script type="text/javascript" src='{{static_url("js/jquery.js")}}'></script>
+    <script type="text/javascript" src='{{static_url("js/main.js")}}'></script>
+    <script type="text/javascript" src='{{static_url("js/integrator.js")}}'></script>
+    <script src='{{static_url("js/bootstrap.min.js")}}'></script>
+    {% block headReplenish %}
+        
+    {% end %}
+
+</head>
+
+<body>
+    
+    <header>
+		<div class="logo">
+			<a href="/index/"><img src='{{ static_url("img/logo.png") }}' title="Magnetic" alt="Magnetic"></a>
+		</div><!-- end logo -->
+
+		<div id="menu_icon"></div>
+		<nav>
+			<ul>
+				<li><a class = "home" href="/index/">Home</a></li>
+                <li><a class = "detail" href="/detail/">Detail</a></li>
+                <li><a class = "history" href="/history/">History</a></li>
+                <li><a class = "about" href="/about/">About</a></li>
+                <li><a class = "contact" href="/contact/">Contact us</a></li>
+			</ul>
+		</nav><!-- end navigation menu -->
+        
+		<div class="footer clearfix">
+			<ul class="social clearfix">
+				<li><a href="#" class="fb" data-title="Facebook"></a></li>
+				<li><a href="#" class="google" data-title="Google +"></a></li>
+				<li><a href="#" class="behance" data-title="Behance"></a></li>
+				<li><a href="#" class="rss" data-title="RSS"></a></li>
+			</ul><!-- end social -->
+
+			<div class="rights">
+                <p>Copyright shanxi university all rights reserved 版权所有:山西大学</p>
+                <p>地址:山西省太原市坞城路92号</p>
+			</div><!-- end rights -->
+        </div><!-- end footer -->
+        
+	</header><!-- end header -->
+    {% include 'title.html' %}
+    <section class="main clearfix">
+    
+    {% block content %}
+
+    {% end %}
+    </section>
+
+    <!-- <script type="text/javascript">
+        $(function () {
+            $(".ul_a_class").click(function () {
+                $(".ul_a_class").removeClass("selected");
+                $(this).addClass("selected");
+            })
+        })
+    </script> -->
+    {% block scriptContent %}
+
+    {% end %}
+
+</body>
+
+</html>

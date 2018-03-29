@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- 需要一个table存放历史记录 -->
+    <table class="table table-condensed">
+        <tr>
+            <th>Account</th>
+            <th>Pic_MainName</th>
+            <th>Pic_AssistName</th>
+            <th>Pic_ResultName</th>
+        </tr>
+        {% for obj in objects %}
+            <tr>
+                <th><a href="#">{{ obj["name"] }}</a></th>
+                <th><a href="#">{{ obj["main"] }}</a></th>
+                <th><a href="#">{{ obj["assist"] }}</a></th>
+                <th><a href="http://127.0.0.1:8888/static/upfile/{{ obj["result"] }}">{{ obj["result"] }}</a></th>
+            </tr>
+        {% end %}
+    </table>
+{% end %}
+
+
+{% block scriptContent %}
+
+    
+<script type="text/javascript">
+    $(function () {
+        $(".history").addClass("selected");
+    })
+</script>
+{% end %}

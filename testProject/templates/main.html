@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block headReplenish %}
+<link rel="stylesheet" href="{{ static_url('css/main/zyUpload.css') }}" type="text/css">
+
+{% end %}
+
+{% block content %}
+    <h1 style="text-align:center;">图片风格迁移</h1>
+    <div id="demo" class="demo" style="width: 650px; height: 400px;">
+        <form id="uploadForm" action="/detail/" method="post" enctype="multipart/form-data">
+            <div class="upload_box">
+                <div class="upload_main">
+                    <div class="upload_choose">
+                        <div class="convent_choice">
+                            <div class="andArea">
+                                <div id="mainChoiceFile" class="filePicker">点击选择主文件</div>  
+                                <input id="fileImage" accept="image/png, image/jpeg, image/jpg" class="mainFileImage" type="file" size="30" name="fileselect" multiple="">
+                            </div>
+                        </div> 
+                        <div class="convent_choice">
+                            <div class="andArea">
+                                <div id="assistChoiceFile" class="filePicker">点击选择副文件</div>  
+                                <input id="fileImage" accept="image/png, image/jpeg, image/jpg" class="assistFileImage" type="file" size="30" name="fileselect" multiple="">
+                            </div>
+                        </div> 
+                    </div>
+                    <div id="preview" class="upload_preview">	
+                        <div id="mainFileImage" class="upload_append_list">
+                            <div class="file_bar">
+                                <div style="padding:5px;">
+                                    <p id="mainFileName" class="file_name"></p>
+                                </div>
+                            </div>
+                            <div class="uploadImg">				
+                                <img id="mainImage" class="upload_image" width="150" height="150" src="" />                                                                 
+                            </div>
+                        </div>
+                        <div id="assistFileImage" class="upload_append_list">
+                            <div class="file_bar">
+                                <div style="padding:5px;">
+                                    <p id="assistFileName" class="file_name"></p>
+                                </div>
+                            </div>
+                            <div class="uploadImg">				
+                                <img id="assistImage" class="upload_image" width="150" height="150" src="" />                                                                 
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="status_bar">
+                        <div id="status_info" class="info"><span id="stepInfo">请先选择主图片</span></div>
+                        <div class="btns">
+                            <div id="clear_btn" class="webuploader_pick">清除选择</div>
+                            <div id="upload_btn" class="upload_btn">开始上传</div>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="upload_submit"> <button type="submit" id="fileSubmit" class="upload_submit_btn">确认上传文件</button> </div>
+            </div>
+        </form>
+    </div>       
+{% end %}
+
+{% block scriptContent %}    
+<script type="text/javascript">
+    $(function () {
+        // 绑定选择事件
+        $("#mainChoiceFile").bind("click", function(e){
+            $(".mainFileImage").click();
+        });
+        $("#assistChoiceFile").bind("click", function(e){
+            $(".assistFileImage").click();
+        });    
+    })
+    $(".mainFileImage").change(function() {
+        var file = document.getElementsByClassName('mainFileImage')[0].files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e) {
+            document.getElementById('mainImage').src = e.target.result;
+        }
+        $('#status_info').html('请选择副文件');
+    });
+    $(".assistFileImage").change(function() {
+        var file = document.getElementsByClassName('assistFileImage')[0].files[0];
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e) {
+            document.getElementById('assistImage').src = e.target.result;
+        }
+        $('#status_info').html('请上传图片！');
+    })
+    $('#clear_btn').click(function() {
+        document.getElementById('mainImage').src = "";
+        document.getElementById('assistImage').src = "";
+        $('#status_info').html('请选择主文件！');
+    })
+    $('#upload_btn').click(function() {
+        $('#fileSubmit').click();
+        $('#status_info').html('文件已上传，后台正在处理，请耐心等待！');
+    })
+    $(function () {
+        $(".detail").addClass("selected");
+    })
+
+</script>
+{% end %}

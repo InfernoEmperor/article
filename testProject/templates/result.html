@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block headReplenish %}
+
+{% end %}
+
+{% block content %}
+    <div>
+        <h1 id="info">请耐心等待！</h1>
+        <img src="" class="upload_image" id="result_img">
+    </div>
+{% end %}
+
+{% block scriptContent %}    
+<script type="text/javascript">
+   
+    $(function () {
+        $(".detail").addClass("selected");
+    })
+    var arr,reg = new RegExp("(^| )email=([^;]*)(;|$)")
+    if (arr=document.cookie.match(reg)) {
+        var  email = arr[2]
+    }
+    var t = window.setInterval("sendMessage()", 1000*10);//1000*60*5
+    var ws = new WebSocket("ws://127.0.0.1:8888/result/?email="+email)
+    var index = 0;
+    ws.onmessage = function(e) {
+        var data = e.data.split(",");
+        if (data[0] == "1") {
+            if (index == 1) {
+                clearInterval(t);
+            }
+            $('#info').html(data[1]);
+            index++;
+        } else if (data[0] == "2") {
+            $('#info').html("结果如下");
+            document.getElementById('result_img').src = data[1]; 
+            clearInterval(t);
+        }
+    }
+    
+    function sendMessage(){
+        alert(1);
+        var datastr = "query";
+        ws.send(datastr);
+    }
+</script>
+{% end %}
